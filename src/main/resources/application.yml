@@ -1,0 +1,55 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        dialect: org.hibernate.dialect.SQLServer2016Dialect
+    show_sql: true
+  datasource:
+    url: jdbc:sqlserver://molba-dev.cg1lnga4isg9.ap-northeast-2.rds.amazonaws.com:1433;databaseName=molba
+    username: 'molbaDev1352'
+    password: '@ajfqk1059'
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  profiles:
+    include: oauth
+  session:
+    store-type: jdbc
+
+#logging:
+#    level:
+#        root: DEBUG
+#    file:
+#        #path: /home/jungdosa/log
+#        path: /home/molba/log
+
+
+server:
+  port: 8000
+
+
+jwt:
+  secretKey: 'dl4851jfkrghifwjapwaus'
+
+aes256:
+  alg: 'AES/CBC/PKCS5Padding'
+  key: 'qhqko1ahbptdezmffhswjswodbdcef3h'
+  iv: 'hood0ar0Ykor1red'
+
+
+
+#테스트
+backend-url: 'https://testjungback.dosa.co.kr'
+frontend-url: 'http://localhost:3000'
+test-url: 'http://localhost:3000'
+
+#운영
+#backend-url: 'https://v2svsback.dosa.co.kr'
+#frontend-url: 'https://j.dosa.co.kr'
+#test-url: 'https://jung-uback.dosa.co.kr'
+
+
+#Aligo
+aligo-url: 'https://apis.aligo.in/send/'
+aligo-key: '5a0zuvtwnjx8u19x7a9cio6ids8dxrob'
+aligo-identifier: 'chomutu'
+aligo-sender: '0221818082'
