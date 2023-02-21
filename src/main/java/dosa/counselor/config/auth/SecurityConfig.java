@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         configuration.addAllowedOriginPattern("http://localhost:3000");
+        configuration.addAllowedOriginPattern("https://jdosa-counselor-front.vercel.app");
 
         configuration.addAllowedMethod("GET");
         configuration.addAllowedMethod("PUT");
