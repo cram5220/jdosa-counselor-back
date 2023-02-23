@@ -36,10 +36,10 @@ aes256:
   iv: 'hood0ar0Ykor1red'
 
 
-
+#
 #테스트
 backend-url: 'https://testjungback.dosa.co.kr'
-frontend-url: 'http://localhost:3000'
+frontend-url: 'https://jdosa-counselor-front.vercel.app'
 test-url: 'http://localhost:3000'
 
 #운영
