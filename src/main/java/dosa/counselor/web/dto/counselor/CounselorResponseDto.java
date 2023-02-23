@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 public class CounselorResponseDto {
 
-    private String email;
+    private String id;
 
     private String name;
 
@@ -31,7 +31,7 @@ public class CounselorResponseDto {
     private Short status;
     @Builder
     public CounselorResponseDto(User entity, String bank){
-        this.email = AES256.decrypt(entity.getEmail());
+        this.id = AES256.decrypt(entity.getId());
         this.name = entity.getName();
         this.luckychart = entity.getLuckychart();
         this.tarot = entity.getTarot();

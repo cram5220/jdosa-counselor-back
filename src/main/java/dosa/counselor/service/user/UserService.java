@@ -25,7 +25,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElse(null);
+        return userRepository.findById(email).orElse(null);
     }
 
 
@@ -47,7 +47,7 @@ public class UserService {
 
     public User findByLoginInfo(String email, String password) {
         Short[] status = {1,2};
-        User user = userRepository.findTop1ByEmailAndStatusIn(email,status).orElseThrow(()-> new BadCredentialsException("존재하지 않는 아이디입니다."));
+        User user = userRepository.findTop1ByIdAndStatusIn(email,status).orElseThrow(()-> new BadCredentialsException("존재하지 않는 아이디입니다."));
         if (!BCrypt.getPasswordEncoder().matches(password, user.getPassword())) {
             throw new BadCredentialsException("비밀번호가 틀립니다");
         }
@@ -65,7 +65,7 @@ public class UserService {
         }
 
         if(user!=null){ // 새 비밀번호를 암호화하여 저장
-            userRepository.updatePwByEmail(BCrypt.getPasswordEncoder().encode(dto.getNewPw()), email);
+            userRepository.updatePwById(BCrypt.getPasswordEncoder().encode(dto.getNewPw()), email);
         }
 
 
