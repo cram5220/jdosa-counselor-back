@@ -35,7 +35,7 @@ public class JwtTokenProvider {
     //private final Logger logger = (Logger) LoggerFactory.getLogger(LogAspect.class);
 
     // 토큰 유효시간 설정
-    private long accessTokenValidTime = 30 * 60 * 1000L; // 30분
+    private long accessTokenValidTime = 60 * 60 * 1000L; // 60분
     private long refreshTokenValidTime = 3 * 60 * 60 * 1000L; // 3시간
 
     private final UserService userService;
