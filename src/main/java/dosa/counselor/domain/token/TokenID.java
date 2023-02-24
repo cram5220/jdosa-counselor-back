@@ -17,6 +17,6 @@ public class TokenID implements Serializable {
 
     public TokenID(Long memberIdx) {
         this.memberIdx=memberIdx;
-        this.memberType=1;
+        this.memberType=2;
     }
 }
