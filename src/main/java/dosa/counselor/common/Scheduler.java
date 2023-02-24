@@ -41,45 +41,45 @@ public class Scheduler {
     @Value("${frontend-url}")
     private String frontUrl;
 
-    // 리프레시 토큰 삭제
-    @Scheduled(cron = "0 0 4 * * *")
-    public void removeOldTokens(){
-        tokenService.removeOldTokens(1);
-    }
+    // 리프레시 토큰 삭제 - 실서버의 경우 같은 액션을 회원 측이 하는 중
+//    @Scheduled(cron = "0 0 4 * * *")
+//    public void removeOldTokens(){
+//        tokenService.removeOldTokens(1);
+//    }
 
-
+    // 문자 발송될 수 있으므로 배포 전까지 주석 처리
     // 매 5분마다 5분 뒤 시작되는 상담 알림 문자 발송 (15분 주기 아닌 이유 = 추후 상품 다양화)
-    @Scheduled(cron = "0 0/5 * * * *")
-    public void sendDirectEnterSms(){
-
-        // 5분뒤 시작되는 상담 모두 불러옴
-        List<CounselingView> list = counselingService.findAllByStartDtAndStatus(LocalDateTime.now().plusMinutes(5),(short)1);
-
-        String code;
-        String cellNumber;
-        String msg=commonCodeService.findOneByCode("AUTHCODE","TYPE","DIRENTER").getText().replace("${frontUrl}",frontUrl);
-        // 상담별로 인증코드 생성하여 DB 저장
-        for(CounselingView counsel : list){
-            //코드 생성
-            code = counsel.getCounselorIdx().toString();
-            code += "$";
-            code += counsel.getIdx();
-            code = URLEncoder.encode(AES256.encrypt(code));
-
-            // DB 저장
-            authcodeRepository.save(Authcode.builder()
-                            .memberIdx(counsel.getCounselorIdx())
-                            .type((short)3)
-                            .code(code)
-                            .expAfterMin(15L)
-                    .build());
-
-            cellNumber = userService.findByUserIdx(counsel.getCounselorIdx()).getCellphone();
-
-            aligoService.sendAligoSms(cellNumber, msg+code);
-        }
-
-    }
+//    @Scheduled(cron = "0 0/5 * * * *")
+//    public void sendDirectEnterSms(){
+//
+//        // 5분뒤 시작되는 상담 모두 불러옴
+//        List<CounselingView> list = counselingService.findAllByStartDtAndStatus(LocalDateTime.now().plusMinutes(5),(short)1);
+//
+//        String code;
+//        String cellNumber;
+//        String msg=commonCodeService.findOneByCode("AUTHCODE","TYPE","DIRENTER").getText().replace("${frontUrl}",frontUrl);
+//        // 상담별로 인증코드 생성하여 DB 저장
+//        for(CounselingView counsel : list){
+//            //코드 생성
+//            code = counsel.getCounselorIdx().toString();
+//            code += "$";
+//            code += counsel.getIdx();
+//            code = URLEncoder.encode(AES256.encrypt(code));
+//
+//            // DB 저장
+//            authcodeRepository.save(Authcode.builder()
+//                            .memberIdx(counsel.getCounselorIdx())
+//                            .type((short)3)
+//                            .code(code)
+//                            .expAfterMin(15L)
+//                    .build());
+//
+//            cellNumber = userService.findByUserIdx(counsel.getCounselorIdx()).getCellphone();
+//
+//            aligoService.sendAligoSms(cellNumber, msg+code);
+//        }
+//
+//    }
 
 
     // 어드민 수정 전까진 주석처리
