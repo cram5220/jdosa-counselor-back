@@ -27,7 +27,7 @@ public class CounselorController {
     @PutMapping("/counselor/password")
     public void updateCounselorPW(@LoginUser AuthedUser user,
                                   @RequestBody ChangePwRequestDto dto){
-        userService.updateCounselorPW(user.getEmail(), dto);
+        userService.updateCounselorPW(user.getId(), dto);
     }
 
 }
